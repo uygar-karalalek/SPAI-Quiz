@@ -10,11 +10,12 @@ import android.widget.Button
 import android.widget.EditText
 import com.ameti.quiz.MainActivity
 import com.ameti.quiz.R
-import com.ameti.quiz.db.DbManager
+import com.ameti.quiz.db.QuizDatabaseManager
 
 class LoginFragment : Fragment() {
 
-    lateinit var dbManager: DbManager
+    lateinit var dbManager: QuizDatabaseManager
+    lateinit var rootView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,16 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val inflate = inflater.inflate(R.layout.fragment_login, container, false)
+        rootView = inflate.rootView
+
+        rootView.findViewById<Button>(R.id.do_login_button).setOnClickListener {
+            val username = rootView.findViewById<EditText>(R.id.login_username).text.toString()
+            val password = rootView.findViewById<EditText>(R.id.login_password).text.toString()
+            if (dbManager.doUsnAndPasswordExist(username , password)) {
+                Log.d("LOGG", "fr")
+            }
+        }
+
         return inflate
     }
 

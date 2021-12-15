@@ -27,21 +27,37 @@
         tools:layout_editor_absoluteX="174dp" />
 
     <EditText
-        android:id="@+id/registration_username"
+        android:id="@+id/login_username"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="username"
+        android:hint="username (min. 3)"
         android:inputType="textPersonName" />
 
+    <TextView
+        android:id="@+id/register_usn_warn"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:text="Username must have more than 3 characters!"
+        android:textColor="#A81616"
+        android:visibility="gone" />
+
     <EditText
-        android:id="@+id/registration_password"
+        android:id="@+id/login_password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
-        android:hint="password"
+        android:hint="password (min 6)"
         android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/register_pwd_warn"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:text="Password must have more than 6 characters!"
+        android:textColor="#A81616"
+        android:visibility="gone" />
 
     <EditText
         android:id="@+id/registration_confirm_password"
@@ -52,13 +68,38 @@
         android:hint="confirm password"
         android:inputType="textPassword" />
 
+    <TextView
+        android:id="@+id/register_confirm_warn"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|left"
+        android:text="Write the same password please!"
+        android:textColor="#A81616"
+        android:visibility="gone" />
+
     <Button
-        android:id="@+id/do_register_btn"
+        android:id="@+id/do_login_button"
         style="@style/FirstChoiceLogin"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="Register"
         android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/registration_complete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Completed registration successfully!"
+        android:textColor="#4CAF50"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/user_exists_warn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username già esistente!"
+        android:textColor="#C81919"
+        android:visibility="gone" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

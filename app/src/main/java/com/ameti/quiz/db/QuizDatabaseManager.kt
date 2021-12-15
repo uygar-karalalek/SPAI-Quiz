@@ -6,8 +6,9 @@ import com.ameti.quiz.R
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.lang.Exception
 
-class DatabaseQuizManager(val context: Context): DbManager("quiz.db", 1) {
+class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 0) {
 
     override fun dbVersionChanged(
         sqliteDatabase: SQLiteDatabase?,
@@ -35,6 +36,33 @@ class DatabaseQuizManager(val context: Context): DbManager("quiz.db", 1) {
             sqliteDatabase.execSQL(insertStmt)
         }
         insertReader.close()
+    }
+
+    fun insertUser(username: String, password: String): Boolean {
+        return try {
+            sqliteDatabase.execSQL(
+                "INSERT INTO user VALUES(null, ?, ?, 0)",
+                arrayOf(
+                    username,
+                    password
+                )
+            )
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    fun doUsnAndPasswordExist(username: String, password: String): Boolean {
+        return sqliteDatabase.query(
+            "user",
+            arrayOf("username", "password"),
+            "username=? AND password=?",
+            arrayOf(username, password),
+            null,
+            null,
+            null
+        ).count == 1
     }
 
 }

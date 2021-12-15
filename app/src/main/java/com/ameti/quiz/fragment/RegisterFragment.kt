@@ -1,33 +1,22 @@
 package com.ameti.quiz.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import com.ameti.quiz.MainActivity
 import com.ameti.quiz.R
-import com.ameti.quiz.db.DbManager
+import com.ameti.quiz.db.QuizDatabaseManager
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RegisterFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RegisterFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    lateinit var dbManager: DbManager
+    lateinit var dbManager: QuizDatabaseManager
+    lateinit var rootView: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,41 +27,65 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val inflate = inflater.inflate(R.layout.fragment_register, container, false)
-        val rootView = inflate.rootView
-        val registrationUsername = rootView.findViewById<EditText>(R.id.registration_username)
-        val registrationPassword = rootView.findViewById<EditText>(R.id.registration_password)
-        rootView.findViewById<Button>(R.id.do_register_btn).setOnClickListener {
-            Log.d("FF", "REGISTER")
-            dbManager.sqliteDatabase.execSQL(
-                "INSERT INTO user VALUES(null, ?, ?, 0)",
-                arrayOf(
-                    registrationUsername.text,
-                    registrationPassword.text
-                )
-            )
+        rootView = inflate.rootView
+
+        rootView.findViewById<Button>(R.id.do_login_button).setOnClickListener {
+
+            val registrationPassword = getRegistrationPassword()
+            val registrationUsername = getRegistrationUsername()
+            val confirmPassword = registrationConfirmPassword()
+
+            val usnWarning = getUsernameWarning().also { it.visibility = GONE }
+            val pwdWarning = getPasswordWarning().also { it.visibility = GONE }
+            val confirmWarning = getConfirmPasswordWarning().also { it.visibility = GONE }
+            val userExistsWarning = getUserExistsWarning().also { it.visibility = GONE }
+            val registrationComplete = getRegistrationCompleteView().also { it.visibility = GONE }
+
+            val usnMinLen = registrationUsername.length >= 3
+            val pswMinLen = registrationPassword.length >= 6
+            val pwdAndConfirmPwdMatch = confirmPassword == registrationPassword
+
+            when {
+                usnMinLen.not() -> usnWarning.visibility = VISIBLE
+                pswMinLen.not() -> pwdWarning.visibility = VISIBLE
+                pwdAndConfirmPwdMatch.not() -> confirmWarning.visibility = VISIBLE
+
+                else -> {
+                    if (dbManager.insertUser(
+                            registrationUsername,
+                            registrationPassword
+                        )
+                    ) {
+                        registrationComplete.visibility = VISIBLE
+                    } else {
+                        userExistsWarning.visibility = VISIBLE
+                    }
+                }
+            }
         }
         return inflate
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RegisterFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RegisterFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+    private fun getUserExistsWarning() = rootView.findViewById<TextView>(R.id.user_exists_warn)
+
+    private fun getRegistrationCompleteView() =
+        rootView.findViewById<TextView>(R.id.registration_complete)
+
+    private fun getConfirmPasswordWarning() =
+        rootView.findViewById<TextView>(R.id.register_confirm_warn)
+
+    private fun getPasswordWarning() = rootView.findViewById<TextView>(R.id.register_pwd_warn)
+
+    private fun getUsernameWarning() = rootView.findViewById<TextView>(R.id.register_usn_warn)
+
+    private fun registrationConfirmPassword() =
+        rootView.findViewById<EditText>(R.id.registration_confirm_password).text.toString()
+
+    private fun getRegistrationPassword() =
+        rootView.findViewById<EditText>(R.id.login_password).text.toString()
+
+    private fun getRegistrationUsername() =
+        rootView.findViewById<EditText>(R.id.login_username).text.toString()
+
 }

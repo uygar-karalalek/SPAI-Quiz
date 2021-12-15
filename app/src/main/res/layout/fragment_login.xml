@@ -27,7 +27,7 @@
         tools:layout_editor_absoluteX="174dp" />
 
     <EditText
-        android:id="@+id/registration_username"
+        android:id="@+id/login_username"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -35,7 +35,7 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/registration_password"
+        android:id="@+id/login_password"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -44,7 +44,7 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/do_register_btn"
+        android:id="@+id/do_login_button"
         style="@style/FirstChoiceLogin"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
