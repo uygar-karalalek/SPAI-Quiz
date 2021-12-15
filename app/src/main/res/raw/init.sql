@@ -1,2 +1,2 @@
 CREATE TABLE question (  id        BIGINT       PRIMARY KEY    NOT NULL, response1 VARCHAR (45) NOT NULL, response2 VARCHAR (45) NOT NULL, response3 VARCHAR (45) NOT NULL,    response4 VARCHAR (45) NOT NULL);
-CREATE TABLE `user` (    id       BIGINT (45)  PRIMARY KEY                          NOT NULL,    username VARCHAR (45) UNIQUE                          NOT NULL,    password VARCHAR (45) NOT NULL, points INT DEFAULT (0));
+CREATE TABLE `user` (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,    username VARCHAR (45) UNIQUE                          NOT NULL,    password VARCHAR (45) NOT NULL, points INT DEFAULT (0));

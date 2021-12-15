@@ -18,6 +18,7 @@ class DatabaseQuizManager(val context: Context): DbManager("quiz.db", 1) {
         sqliteDatabase.apply {
             val dropDbQuery = context.resources.openRawResource(R.raw.delete)
             dropDbQuery.executeQuery()
+            initializeDb(sqliteDatabase, dbName, version)
         }
     }
 

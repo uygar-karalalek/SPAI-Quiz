@@ -17,14 +17,17 @@ abstract class DbManager(val dbName: String, val version: Int = 1) {
 
             val arrTblNames = ArrayList<String>()
 
-            if (c.moveToFirst()) {
-                while ( !c.isAfterLast() ) {
-                    arrTblNames.add( c.getString( c.getColumnIndex("name")) );
-                    c.moveToNext();
+            val exists = dbFile.exists()
+            if (exists) {
+                if (c.moveToFirst()) {
+                    while ( !c.isAfterLast() ) {
+                        arrTblNames.add( c.getString( c.getColumnIndex("name")) );
+                        c.moveToNext();
+                    }
                 }
             }
 
-            val existingDb = dbFile.exists() && arrTblNames.isNotEmpty()
+            val existingDb = exists && arrTblNames.isNotEmpty()
 
             if (!existingDb) initializeDb(sqliteDatabase, dbName, version)
             else {

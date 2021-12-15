@@ -14,9 +14,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         dbManager = DatabaseQuizManager(this)
-        Log.d("FF", "FFFF")
         dbManager.onAttach(this)
-        Log.d("UU", "RRR")
     }
 
 }
