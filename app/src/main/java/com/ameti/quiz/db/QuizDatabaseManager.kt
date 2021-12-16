@@ -70,4 +70,28 @@ class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 0) 
         ).count == 1
     }
 
+    fun getUserClassification(): Map<String, Int> {
+        val cursor = sqliteDatabase.query(
+            "user",
+            arrayOf("username", "points"),
+            null,
+            null,
+            null,
+            null,
+            "points DESC"
+        )
+
+        val usernameAndPoints: MutableMap<String, Int> = mutableMapOf()
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast) {
+                val username = cursor.getString(cursor.getColumnIndex("username"))
+                val points = cursor.getInt(cursor.getColumnIndex("points"))
+                usernameAndPoints[username] = points
+                cursor.moveToNext();
+            }
+        }
+
+        return usernameAndPoints
+    }
+
 }

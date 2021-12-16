@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 
-abstract class DatabaseManager(val dbName: String, val version: Int = 0) {
+abstract class DatabaseManager(val dbName: String, val version: Int) {
 
     lateinit var sqliteDatabase: SQLiteDatabase
 
@@ -21,7 +21,7 @@ abstract class DatabaseManager(val dbName: String, val version: Int = 0) {
             val exists = dbFile.exists()
             if (exists) {
                 if (c.moveToFirst()) {
-                    while (!c.isAfterLast()) {
+                    while (!c.isAfterLast) {
                         arrTblNames.add(c.getString(c.getColumnIndex("name")));
                         c.moveToNext();
                     }
