@@ -3,7 +3,6 @@ package com.ameti.quiz
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ameti.quiz.db.QuizDatabaseManager
-import com.ameti.quiz.db.DatabaseManager
 
 class MainActivity : AppCompatActivity() {
 
