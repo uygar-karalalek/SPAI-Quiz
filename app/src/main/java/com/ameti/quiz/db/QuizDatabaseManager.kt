@@ -8,7 +8,7 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.lang.Exception
 
-class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 0) {
+class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 1) {
 
     override fun dbVersionChanged(
         sqliteDatabase: SQLiteDatabase?,
@@ -19,11 +19,16 @@ class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 0) 
         sqliteDatabase.apply {
             val dropDbQuery = context.resources.openRawResource(R.raw.delete)
             dropDbQuery.executeQuery()
-            initializeDb(sqliteDatabase, dbName, version)
+            initializeDb(sqliteDatabase, setOf(), dbName, version)
         }
     }
 
-    override fun initializeDb(sqliteDatabase: SQLiteDatabase?, dbName: String, version: Int) {
+    override fun initializeDb(
+        sqliteDatabase: SQLiteDatabase?, cols: Set<String>,
+        dbName: String, version: Int
+    ) {
+        for (col in cols) sqliteDatabase!!.execSQL("DROP TABLE $col;")
+
         val createDbQuery = context.resources.openRawResource(R.raw.init)
         createDbQuery.executeQuery()
     }

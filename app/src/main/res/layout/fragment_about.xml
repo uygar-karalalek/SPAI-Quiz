@@ -18,11 +18,10 @@
         android:src="@drawable/quiz_image" />
 
     <TextView
-        android:id="@+id/textView"
         style="@style/FirstChoiceTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/quiz_frame_title"
+        android:text="About"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="174dp" />
 
@@ -30,7 +29,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:text="@string/about" />
+        android:background="@drawable/about_text_drawable"
+        android:justificationMode="inter_word"
+        android:padding="15dp"
+        android:text="@string/about"
+        android:textSize="16sp" />
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
