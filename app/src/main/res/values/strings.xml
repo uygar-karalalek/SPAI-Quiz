@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="quiz_frame_title">SPAI Quiz</string>
     <string name="go_to_login"><u>Go to login</u></string>
+    <string name="about">L’idea di app usata in questo progetto è quella di un quiz simile a <b>Trivia</b>, soltanto che <b>la modalità online</b> (dato che non c’è stato abbastanza tempo), viene <b>simulata direttamente nel device locale</b>, permettendoti di inserire più utenti e giocare con account diversi. L’app è stata creata in Kotlin con Android Studio, da <b><i>Emilija Daceva</i></b> e <b><i>Uygar Karalalek</i></b> all’AMETI, con sede a Bodio in un corso interaziendale per apprendisti <b>sotto la sorveglianza del professor Visnu</b>
+        <br/><br/><br/><br/><br/><br/><br/><br/>Copyright © 2021 | All Rights Reserved.</string>
 </resources>
