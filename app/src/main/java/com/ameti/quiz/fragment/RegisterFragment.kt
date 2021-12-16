@@ -7,7 +7,6 @@ import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.findNavController
 import com.ameti.quiz.MainActivity
@@ -18,6 +17,7 @@ class RegisterFragment : Fragment() {
 
     lateinit var dbManager: QuizDatabaseManager
     lateinit var rootView: View
+    lateinit var viewManager: RegisterViewManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,42 +30,9 @@ class RegisterFragment : Fragment() {
     ): View? {
         val inflate = inflater.inflate(R.layout.fragment_register, container, false)
         rootView = inflate.rootView
+        viewManager = RegisterViewManager(rootView)
 
-        rootView.findViewById<Button>(R.id.do_login_button).setOnClickListener {
-
-            val registrationPassword = getRegistrationPassword()
-            val registrationUsername = getRegistrationUsername()
-            val confirmPassword = registrationConfirmPassword()
-
-            val usnWarning = getUsernameWarning().also { it.visibility = GONE }
-            val pwdWarning = getPasswordWarning().also { it.visibility = GONE }
-            val confirmWarning = getConfirmPasswordWarning().also { it.visibility = GONE }
-            val userExistsWarning = getUserExistsWarning().also { it.visibility = GONE }
-            val registrationComplete = getRegistrationCompleteView().also { it.visibility = GONE }
-
-            val usnMinLen = registrationUsername.length >= 3
-            val pswMinLen = registrationPassword.length >= 6
-            val pwdAndConfirmPwdMatch = confirmPassword == registrationPassword
-
-            when {
-                usnMinLen.not() -> usnWarning.visibility = VISIBLE
-                pswMinLen.not() -> pwdWarning.visibility = VISIBLE
-                pwdAndConfirmPwdMatch.not() -> confirmWarning.visibility = VISIBLE
-
-                else -> {
-                    if (dbManager.insertUser(
-                            registrationUsername,
-                            registrationPassword
-                        )
-                    ) {
-                        registrationComplete.visibility = VISIBLE
-                        getRegisterToLoginLink().visibility = VISIBLE
-                    } else {
-                        userExistsWarning.visibility = VISIBLE
-                    }
-                }
-            }
-        }
+        rootView.findViewById<Button>(R.id.do_login_button).setOnClickListener { validate() }
 
         rootView.findViewById<TextView>(R.id.register_link_to_login).setOnClickListener {
             it.findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
@@ -74,28 +41,41 @@ class RegisterFragment : Fragment() {
         return inflate
     }
 
-    private fun getRegisterToLoginLink() =
-        rootView.findViewById<TextView>(R.id.register_link_to_login)
+    private fun validate() {
+        val validator = RegistrationValidator(
+            username = viewManager.getRegistrationUsername(),
+            password = viewManager.getRegistrationPassword(),
+            confirmPassword = viewManager.registrationConfirmPassword()
+        )
 
-    private fun getUserExistsWarning() = rootView.findViewById<TextView>(R.id.user_exists_warn)
+        validatorCases(validator, viewManager)
+    }
 
-    private fun getRegistrationCompleteView() =
-        rootView.findViewById<TextView>(R.id.registration_complete)
+    private fun validatorCases(validator: RegistrationValidator, viewManager: RegisterViewManager) {
+        viewManager.visibilitySetup()
 
-    private fun getConfirmPasswordWarning() =
-        rootView.findViewById<TextView>(R.id.register_confirm_warn)
+        when {
+            validator.usernameNotValid() -> viewManager.usernameInvisibleWarn().visibility = VISIBLE
+            validator.passwordNotValid() -> viewManager.passwordInvisibleWarn().visibility = VISIBLE
+            validator.confirmPasswordNotValid() -> viewManager.confirmPasswordInvisibleWarn().visibility = VISIBLE
 
-    private fun getPasswordWarning() = rootView.findViewById<TextView>(R.id.register_pwd_warn)
+            else -> {
+                if (tryInsertUserToDb(validator)) registrationComplete(viewManager)
+                else viewManager.userExistsInvisibleWarn().visibility = VISIBLE
+            }
+        }
+    }
 
-    private fun getUsernameWarning() = rootView.findViewById<TextView>(R.id.register_usn_warn)
+    private fun registrationComplete(viewManager: RegisterViewManager) {
+        viewManager.registrationCompleteInvisibleView().visibility = VISIBLE
+        viewManager.getRegisterToLoginLink().visibility = VISIBLE
+    }
 
-    private fun registrationConfirmPassword() =
-        rootView.findViewById<EditText>(R.id.registration_confirm_password).text.toString()
-
-    private fun getRegistrationPassword() =
-        rootView.findViewById<EditText>(R.id.login_password).text.toString()
-
-    private fun getRegistrationUsername() =
-        rootView.findViewById<EditText>(R.id.login_username).text.toString()
+    private fun tryInsertUserToDb(validator: RegistrationValidator): Boolean {
+        return dbManager.insertUser(
+            validator.username,
+            validator.password
+        )
+    }
 
 }

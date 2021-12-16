@@ -38,7 +38,7 @@
         android:id="@+id/register_usn_warn"
         android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:text="Username must have more than 3 characters!"
+        android:text="Username must have at least 3 characters!"
         android:textColor="#A81616"
         android:visibility="gone" />
 
@@ -55,7 +55,7 @@
         android:id="@+id/register_pwd_warn"
         android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:text="Password must have more than 6 characters!"
+        android:text="Password must have at least 6 characters!"
         android:textColor="#A81616"
         android:visibility="gone" />
 
