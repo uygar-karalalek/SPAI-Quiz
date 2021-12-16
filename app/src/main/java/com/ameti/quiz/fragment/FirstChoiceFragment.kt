@@ -23,7 +23,7 @@ class FirstChoiceFragment : Fragment() {
 
         rootView.findViewById<Button>(R.id.login_btn).apply {
             setOnClickListener {
-                it.findNavController().navigate(R.id.action_navHostFragment_to_loginFragment)
+                it.findNavController().navigate(R.id.action_firstChoiceFragment_to_loginFragment)
             }
         }
 

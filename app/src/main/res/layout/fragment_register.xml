@@ -90,6 +90,7 @@
         android:id="@+id/registration_complete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="Completed registration successfully!"
         android:textColor="#4CAF50"
         android:visibility="gone" />
@@ -100,6 +101,16 @@
         android:layout_height="wrap_content"
         android:text="Username già esistente!"
         android:textColor="#C81919"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/register_link_to_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="@string/go_to_login"
+        android:textColor="#278DFB"
+        android:textSize="16sp"
         android:visibility="gone" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

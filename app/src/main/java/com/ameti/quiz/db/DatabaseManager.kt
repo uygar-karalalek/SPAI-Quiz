@@ -13,21 +13,22 @@ abstract class DatabaseManager(val dbName: String, val version: Int = 1) {
             val dbFile = context.getDatabasePath(dbName)
             sqliteDatabase = context.openOrCreateDatabase(dbName, Context.MODE_PRIVATE, null)
 
-            val c: Cursor = sqliteDatabase.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null)
+            val c: Cursor =
+                sqliteDatabase.rawQuery("SELECT name FROM sqlite_master WHERE type='table'", null)
 
             val arrTblNames = ArrayList<String>()
 
             val exists = dbFile.exists()
             if (exists) {
                 if (c.moveToFirst()) {
-                    while ( !c.isAfterLast() ) {
-                        arrTblNames.add( c.getString( c.getColumnIndex("name")) );
+                    while (!c.isAfterLast()) {
+                        arrTblNames.add(c.getString(c.getColumnIndex("name")));
                         c.moveToNext();
                     }
                 }
             }
 
-            val existingDb = exists && arrTblNames.isNotEmpty()
+            val existingDb = exists && arrTblNames.containsAll(arrayListOf("user", "question"))
 
             if (!existingDb) initializeDb(sqliteDatabase, dbName, version)
             else {
@@ -43,7 +44,8 @@ abstract class DatabaseManager(val dbName: String, val version: Int = 1) {
         dbName: String,
         oldVersion: Int,
         version: Int
-    ) {}
+    ) {
+    }
 
     abstract fun initializeDb(sqliteDatabase: SQLiteDatabase?, dbName: String, version: Int)
 

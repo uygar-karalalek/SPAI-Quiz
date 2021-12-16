@@ -34,7 +34,7 @@ class LoginFragment : Fragment() {
             val username = rootView.findViewById<EditText>(R.id.login_username).text.toString()
             val password = rootView.findViewById<EditText>(R.id.login_password).text.toString()
             if (dbManager.doUsnAndPasswordExist(username , password)) {
-                Log.d("LOGG", "fr")
+
             }
         }
 

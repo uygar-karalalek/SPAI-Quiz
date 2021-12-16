@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.navigation.findNavController
 import com.ameti.quiz.MainActivity
 import com.ameti.quiz.R
 import com.ameti.quiz.db.QuizDatabaseManager
@@ -58,14 +59,23 @@ class RegisterFragment : Fragment() {
                         )
                     ) {
                         registrationComplete.visibility = VISIBLE
+                        getRegisterToLoginLink().visibility = VISIBLE
                     } else {
                         userExistsWarning.visibility = VISIBLE
                     }
                 }
             }
         }
+
+        rootView.findViewById<TextView>(R.id.register_link_to_login).setOnClickListener {
+            it.findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+        }
+
         return inflate
     }
+
+    private fun getRegisterToLoginLink() =
+        rootView.findViewById<TextView>(R.id.register_link_to_login)
 
     private fun getUserExistsWarning() = rootView.findViewById<TextView>(R.id.user_exists_warn)
 
