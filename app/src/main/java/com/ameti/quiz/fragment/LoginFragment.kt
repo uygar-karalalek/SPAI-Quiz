@@ -1,5 +1,6 @@
 package com.ameti.quiz.fragment
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,10 +19,12 @@ class LoginFragment : Fragment() {
 
     lateinit var dbManager: QuizDatabaseManager
     lateinit var rootView: View
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         dbManager = (this.context as MainActivity).dbManager
+        sharedPreferences = (this.context as MainActivity).sharedPreferences
     }
 
     override fun onCreateView(
@@ -36,6 +39,7 @@ class LoginFragment : Fragment() {
             val username = rootView.findViewById<EditText>(R.id.login_username).text.toString()
             val password = rootView.findViewById<EditText>(R.id.login_password).text.toString()
             if (dbManager.doUsnAndPasswordExist(username , password)) {
+                sharedPreferences.edit().putString("user", username).apply()
                 it.findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
             } else {
                 rootView.findViewById<TextView>(R.id.login_failed_warn).visibility = VISIBLE

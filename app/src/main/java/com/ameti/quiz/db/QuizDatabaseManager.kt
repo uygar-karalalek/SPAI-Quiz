@@ -8,7 +8,7 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.lang.Exception
 
-class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 0) {
+class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 1) {
 
     override fun dbVersionChanged(
         sqliteDatabase: SQLiteDatabase?,
@@ -68,6 +68,45 @@ class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 0) 
             null,
             null
         ).count == 1
+    }
+
+    fun updatePoints(username: String, points: Int): Boolean {
+        return try {
+            sqliteDatabase.execSQL(
+                "UPDATE user SET points=points+? WHERE username=?",
+                arrayOf(
+                    points,
+                    username
+                )
+            )
+            true
+        } catch (e: Exception) {
+            false
+        }
+    }
+
+    fun getCategories(): ArrayList<Pair<Int, String>> {
+        val cursor = sqliteDatabase.query(
+            "category",
+            arrayOf("id", "name"),
+            null,
+            null,
+            null,
+            null,
+            null
+        )
+
+        val idAndName: ArrayList<Pair<Int, String>> = arrayListOf()
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast) {
+                val id = cursor.getInt(cursor.getColumnIndex("id"))
+                val name = cursor.getString(cursor.getColumnIndex("name"))
+                idAndName.add(id to name)
+                cursor.moveToNext();
+            }
+        }
+
+        return idAndName
     }
 
     fun getUserClassification(): ArrayList<Pair<String, Int>> {

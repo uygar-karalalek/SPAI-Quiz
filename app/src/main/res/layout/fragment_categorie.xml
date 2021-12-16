@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".fragment.FirstChoiceFragment">
+    tools:context=".fragment.CategoriesFragment">
 
     <ImageView
         android:id="@+id/imageView"
@@ -27,20 +27,49 @@
         tools:layout_editor_absoluteX="174dp" />
 
     <Button
-        android:id="@+id/login_btn"
+        android:id="@+id/category1"
         style="@style/FirstChoiceLogin"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:height="60dp"
-        android:text="Log in"
-        android:textAllCaps="false" />
+        android:text="Film + Serie"
+        android:textAllCaps="false"
+        tools:text="Film + Serie" />
 
     <Button
-        android:id="@+id/register_btn"
+        android:id="@+id/category2"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:height="60dp"
-        android:text="Register"
-        android:textAllCaps="false" />
+        android:backgroundTint="#0BCCBA"
+        android:text="Cultura generale"
+        android:textAllCaps="false"
+        tools:text="Cultura generale" />
+
+    <Button
+        android:id="@+id/category3"
+        style="@style/FirstChoiceLogin"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="0dp"
+        android:height="60dp"
+        android:backgroundTint="#673AB7"
+        android:text="Musica"
+        android:textAllCaps="false"
+        tools:text="Musica" />
+
+    <Button
+        android:id="@+id/category4"
+        style="@style/FirstChoiceLogin"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="0dp"
+        android:height="60dp"
+        android:backgroundTint="#FF9800"
+        android:text="Programmazione"
+        android:textAllCaps="false"
+        tools:text="Programmazione" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

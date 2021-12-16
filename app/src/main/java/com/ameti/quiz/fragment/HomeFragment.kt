@@ -24,6 +24,15 @@ class HomeFragment : Fragment() {
         rootView.findViewById<Button>(R.id.home_to_about_btn).setOnClickListener {
             it.findNavController().navigate(R.id.action_homeFragment_to_aboutFragment)
         }
+
+        rootView.findViewById<Button>(R.id.home_to_categories_btn).setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_categoriesFragment)
+        }
+
+        rootView.findViewById<Button>(R.id.points_btn).setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_scoreboardFragment)
+        }
+
         return inflate
     }
 

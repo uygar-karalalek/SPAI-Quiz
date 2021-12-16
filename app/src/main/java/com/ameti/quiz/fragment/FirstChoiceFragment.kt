@@ -21,13 +21,13 @@ class FirstChoiceFragment : Fragment() {
         val inflate = inflater.inflate(R.layout.fragment_first_choice, container, false)
         rootView = inflate.rootView
 
-        rootView.findViewById<Button>(R.id.home_to_categories_btn).apply {
+        rootView.findViewById<Button>(R.id.login_btn).apply {
             setOnClickListener {
                 it.findNavController().navigate(R.id.action_firstChoiceFragment_to_loginFragment)
             }
         }
 
-        rootView.findViewById<Button>(R.id.points_btn).setOnClickListener {
+        rootView.findViewById<Button>(R.id.register_btn).setOnClickListener {
             it.findNavController().navigate(R.id.action_navHostFragment_to_registerFragment)
         }
 

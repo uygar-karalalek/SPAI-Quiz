@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".fragment.GameFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/quiz_image" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/FirstChoiceTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quiz_frame_title"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="174dp" />
+
+    <TextView
+        android:id="@+id/id_domanda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:text="Domanda"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/domanda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="{quiz.domanda}"
+        android:textSize="24sp"
+        tools:text='Quale cantante canta la canzone "Bho"?' />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/risposta1"
+            style="@style/rispostaStyle"
+            android:text="{quiz.risposte[0]}"
+            tools:text='Risposta 1' />
+
+        <Button
+            android:id="@+id/risposta2"
+            style="@style/rispostaStyle"
+            android:text="{quiz.risposte[1]}"
+            tools:text='Risposta 2' />
+
+        <Button
+            android:id="@+id/risposta3"
+            style="@style/rispostaStyle"
+            android:text="{quiz.risposte[2]}"
+            tools:text='Risposta 3' />
+
+        <Button
+            android:id="@+id/risposta4"
+            style="@style/rispostaStyle"
+            android:text="{quiz.risposte[3]}"
+            tools:text='Risposta 4' />
+
+        <Button
+            android:id="@+id/avanti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:text="Avanti" />
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="quiz"
+            type="com.example.diceroller2.MainActivity" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/game_root"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        tools:context=".fragment.GameFragment">
+
+        <TextView
+            android:id="@+id/id_domanda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Domanda"
+            android:textSize="34sp" />
+
+        <TextView
+            android:id="@+id/domanda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="{quiz.domanda}"
+            android:textSize="24sp"
+            tools:text='Quale cantante canta la canzone "Bho"?' />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/risposta1"
+                style="@style/rispostaStyle"
+                android:text="{quiz.risposte[0]}"
+                tools:text='Risposta 1' />
+
+            <Button
+                android:id="@+id/risposta2"
+                style="@style/rispostaStyle"
+                android:text="{quiz.risposte[1]}"
+                tools:text='Risposta 2' />
+
+            <Button
+                android:id="@+id/risposta3"
+                style="@style/rispostaStyle"
+                android:text="{quiz.risposte[2]}"
+                tools:text='Risposta 3' />
+
+            <Button
+                android:id="@+id/risposta4"
+                style="@style/rispostaStyle"
+                android:text="{quiz.risposte[3]}"
+                tools:text='Risposta 4' />
+
+            <Button
+                android:id="@+id/avanti"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:text="Avanti" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>-->
+

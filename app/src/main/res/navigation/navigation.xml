@@ -46,11 +46,56 @@
         <action
             android:id="@+id/action_homeFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoriesFragment"
+            app:destination="@id/categoriesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_scoreboardFragment"
+            app:destination="@id/scoreboardFragment" />
     </fragment>
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.ameti.quiz.fragment.AboutFragment"
         android:label="AboutFragment"
         tools:layout="@layout/fragment_about"/>
-
+    <fragment
+        android:id="@+id/categoriesFragment"
+        android:name="com.ameti.quiz.fragment.CategoriesFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/fragment_categorie">
+        <action
+            android:id="@+id/action_categoriesFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <argument
+            android:name="categoryId"
+            app:argType="string"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment"
+        android:label="fragment_game"
+        android:name="com.ameti.quiz.fragment.GameFragment"
+        tools:layout="@layout/fragment_game" >
+        <action
+            android:id="@+id/action_gameFragment_to_gameFinishFragment"
+            app:destination="@id/gameFinishFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFinishFragment"
+        android:label="fragment_login"
+        android:name="com.ameti.quiz.fragment.GameFinishFragment"
+        tools:layout="@layout/fragment_game_finish" >
+        <argument
+            android:name="puntiFatti"
+            app:argType="string"
+            />
+        <action
+            android:id="@+id/action_gameFinishFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/scoreboardFragment"
+        android:name="com.ameti.quiz.fragment.ScoreboardFragment"
+        android:label="fragment_score_board"
+        tools:layout="@layout/fragment_score_board" />
 </navigation>
