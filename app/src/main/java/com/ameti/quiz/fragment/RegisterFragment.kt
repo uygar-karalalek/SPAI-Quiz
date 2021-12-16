@@ -43,8 +43,8 @@ class RegisterFragment : Fragment() {
 
     private fun validate() {
         val validator = RegistrationValidator(
-            username = viewManager.getRegistrationUsername(),
-            password = viewManager.getRegistrationPassword(),
+            username = viewManager.registrationUsername(),
+            password = viewManager.registrationPassword(),
             confirmPassword = viewManager.registrationConfirmPassword()
         )
 

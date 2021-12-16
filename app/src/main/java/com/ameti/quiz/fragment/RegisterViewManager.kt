@@ -37,12 +37,12 @@ class RegisterViewManager(val registerRootView: View) {
         return registerRootView.findViewById<EditText>(registrationConfirmPassword).text.toString()
     }
 
-    fun getRegistrationPassword(): String {
+    fun registrationPassword(): String {
         val loginPassword = R.id.login_password
         return registerRootView.findViewById<EditText>(loginPassword).text.toString()
     }
 
-    fun getRegistrationUsername(): String {
+    fun registrationUsername(): String {
         val loginUsername = R.id.login_username
         return registerRootView.findViewById<EditText>(loginUsername).text.toString()
     }
