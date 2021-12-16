@@ -32,7 +32,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:height="60dp"
-        android:text="Log in"
+        android:text="Categorie"
         android:textAllCaps="false" />
 
     <Button
@@ -40,7 +40,18 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:height="60dp"
-        android:text="Register"
+        android:text="Classifica"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/home_to_about_btn"
+        style="@style/FirstChoiceLogin"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="0dp"
+        android:height="60dp"
+        android:text="About"
         android:textAllCaps="false" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

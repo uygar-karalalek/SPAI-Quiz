@@ -4,7 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 
-abstract class DatabaseManager(val dbName: String, val version: Int = 1) {
+abstract class DatabaseManager(val dbName: String, val version: Int = 0) {
 
     lateinit var sqliteDatabase: SQLiteDatabase
 

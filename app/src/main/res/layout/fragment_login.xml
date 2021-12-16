@@ -2,7 +2,7 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_root"
+    android:id="@+id/home_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -53,5 +53,13 @@
         android:layout_marginTop="50dp"
         android:text="Log in"
         android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/login_failed_warn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username o password non corretti!"
+        android:textColor="#C81919"
+        android:visibility="gone" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

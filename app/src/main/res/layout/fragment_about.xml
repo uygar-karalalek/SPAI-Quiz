@@ -2,7 +2,7 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_root"
+    android:id="@+id/home_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -35,5 +35,17 @@
         android:text="@string/about"
         android:textSize="16sp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/about_text_drawable"
+        android:justificationMode="inter_word"
+        android:padding="15dp"
+        android:text="@string/copyright_text"
+        android:textSize="16sp" />
+
+    <!--  Copyright © 2021 | All Rights Reserved.  -->
 
 </androidx.appcompat.widget.LinearLayoutCompat>

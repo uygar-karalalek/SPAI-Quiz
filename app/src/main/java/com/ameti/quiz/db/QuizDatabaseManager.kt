@@ -8,7 +8,7 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.lang.Exception
 
-class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 1) {
+class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 0) {
 
     override fun dbVersionChanged(
         sqliteDatabase: SQLiteDatabase?,
