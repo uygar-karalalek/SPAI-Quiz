@@ -35,6 +35,7 @@ class GameFragment : Fragment() {
             punti = 20
         )
     )
+    var questions = mutableListOf<QuizDatabaseManager.Question>()
 
     lateinit var dbManager: QuizDatabaseManager
     lateinit var sharedPreferences: SharedPreferences
@@ -59,7 +60,6 @@ class GameFragment : Fragment() {
         rootView = inflate.rootView
 
         var user = sharedPreferences.getString("user", null)
-        var questions = mutableListOf<QuizDatabaseManager.Question>()
 
         if(arguments != null) {
             if(requireArguments().get("categoryId") != null) {
@@ -77,13 +77,14 @@ class GameFragment : Fragment() {
         risposta3.setOnClickListener { controllaRisposta(risposta3) }
 
         risposta4 = rootView.findViewById(R.id.risposta4)
+        risposta4.setOnClickListener { controllaRisposta(risposta4) }
 
         setData();
 
         rootView.findViewById<Button>(R.id.avanti).setOnClickListener @Suppress("UNUSED_ANONYMOUS_PARAMETER")
         { view: View ->
             count++;
-            if(count >= (domande.size)) {
+            if(count >= (questions.size)) {
                 val bundle: Bundle = Bundle();
                 bundle.putString("puntiFatti", score.toString());
                 dbManager.updatePoints(user.toString(), score)
@@ -100,11 +101,11 @@ class GameFragment : Fragment() {
 
     private fun setData() {
         rootView.findViewById<TextView>(R.id.id_domanda).text = "Domanda " + (count + 1).toString()
-        rootView.findViewById<TextView>(R.id.domanda).text = domande.get(count).domanda;
-        risposta1.text = domande.get(count).risposte[0]
-        risposta2.text = domande.get(count).risposte[1]
-        risposta3.text = domande.get(count).risposte[2]
-        risposta4.text = domande.get(count).risposte[3]
+        rootView.findViewById<TextView>(R.id.domanda).text = questions.get(count).value;
+        risposta1.text = questions.get(count).answers[0]
+        risposta2.text = questions.get(count).answers[1]
+        risposta3.text = questions.get(count).answers[2]
+        risposta4.text = questions.get(count).answers[3]
     }
 
     private fun controllaRisposta(risposta: Button) {
@@ -121,9 +122,10 @@ class GameFragment : Fragment() {
     }
 
     private fun colorBottone(risposta: Button) {
-        if(risposta.text.equals(domande.get(count).rispostaGiusta)) {
+        var rightAnswer = questions.get(count).answers.get(questions.get(count).wright - 1);
+        if(risposta.text.equals(rightAnswer)) {
             risposta.setBackgroundColor(Color.GREEN)
-            score += domande.get(count).punti
+            score += questions.get(count).win_points
         }
         else {
             risposta.setBackgroundColor(Color.RED)
@@ -132,7 +134,7 @@ class GameFragment : Fragment() {
             risposte.add(risposta2)
             risposte.add(risposta3)
             risposte.add(risposta4)
-            val rispostaGiustaButton: Button = risposte.filter { it.text == domande.get(count).rispostaGiusta }.get(0)
+            val rispostaGiustaButton: Button = risposte.filter { it.text == rightAnswer }.get(0)
             rispostaGiustaButton.setBackgroundColor(Color.GREEN)
         }
     }

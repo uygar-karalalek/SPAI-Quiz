@@ -34,7 +34,7 @@
         android:layout_gravity="left"
         android:layout_marginLeft="20dp"
         android:text="Domanda"
-        android:textSize="34sp" />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/domanda"
@@ -43,13 +43,13 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:text="{quiz.domanda}"
-        android:textSize="24sp"
+        android:textSize="16sp"
         tools:text='Quale cantante canta la canzone "Bho"?' />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
         <Button
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:text="Avanti" />
     </LinearLayout>
 
