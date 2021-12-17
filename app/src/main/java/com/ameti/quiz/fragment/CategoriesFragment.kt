@@ -39,8 +39,8 @@ class CategoriesFragment : Fragment() {
         val categoryButtons: MutableList<Button> = mutableListOf(category1, category2, category3, category4)
         categoryButtons.forEachIndexed{ index, button ->
             button.text = categorie[index].second;
-            bundle.putString("categoryId", categorie[index].first.toString())
             button.setOnClickListener {
+                bundle.putString("categoryId", categorie[index].first.toString())
                 it.findNavController().navigate(R.id.action_categoriesFragment_to_gameFragment, bundle)
             }
         }

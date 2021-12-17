@@ -3,13 +3,12 @@ package com.ameti.quiz.db
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.ameti.quiz.R
-import com.ameti.quiz.fragment.GameFragment
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.lang.Exception
 
-class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 0) {
+class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 1) {
 
     data class Question(
         val category: Int,
