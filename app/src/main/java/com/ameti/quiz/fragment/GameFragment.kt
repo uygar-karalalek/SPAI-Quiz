@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import com.ameti.quiz.MainActivity
 import com.ameti.quiz.R
 import com.ameti.quiz.db.QuizDatabaseManager
+import pl.droidsonroids.gif.GifImageView
 
 class GameFragment : Fragment() {
     var questions = mutableListOf<QuizDatabaseManager.Question>()
@@ -78,7 +79,26 @@ class GameFragment : Fragment() {
         return inflate
     }
 
+    fun findResource(name: String): Int {
+        try {
+            val idField = R.drawable::class.java.getDeclaredField(name)
+            return idField.getInt(idField)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return -1
+        }
+    }
+
     private fun setData() {
+        val additionalGif = questions[count].additional_data != null
+
+        if (additionalGif) {
+            val gif = rootView.findViewById<GifImageView>(R.id.gif)
+            gif.visibility = View.VISIBLE
+
+            gif.setImageResource(findResource(questions[count].additional_data!!))
+        }
+
         rootView.findViewById<TextView>(R.id.id_domanda).text = "Domanda " + (count + 1).toString()
         rootView.findViewById<TextView>(R.id.domanda).text = questions.get(count).value;
         answers.forEachIndexed { id, risposta ->

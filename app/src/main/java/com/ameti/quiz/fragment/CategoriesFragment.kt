@@ -29,14 +29,14 @@ class CategoriesFragment : Fragment() {
         rootView = inflate.rootView
         val categorie = dbManager.getCategories();
 
-        val bundle: Bundle = Bundle();
-        bundle.putString("categoryId", "1");
+        val bundle = Bundle()
+        bundle.putString("categoryId", "1")
 
         val category1: Button = rootView.findViewById(R.id.category1)
         val category2: Button = rootView.findViewById(R.id.category2)
         val category3: Button = rootView.findViewById(R.id.category3)
         val category4: Button = rootView.findViewById(R.id.category4)
-        val categoryButtons: MutableList<Button> = mutableListOf<Button>(category1, category2, category3, category4)
+        val categoryButtons: MutableList<Button> = mutableListOf(category1, category2, category3, category4)
         categoryButtons.forEachIndexed{ index, button ->
             button.text = categorie[index].second;
             bundle.putString("categoryId", categorie[index].first.toString())

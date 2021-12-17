@@ -56,24 +56,28 @@
             android:id="@+id/risposta1"
             style="@style/rispostaStyle"
             android:text="{quiz.risposte[0]}"
+            android:textAllCaps="false"
             tools:text='Risposta 1' />
 
         <Button
             android:id="@+id/risposta2"
             style="@style/rispostaStyle"
             android:text="{quiz.risposte[1]}"
+            android:textAllCaps="false"
             tools:text='Risposta 2' />
 
         <Button
             android:id="@+id/risposta3"
             style="@style/rispostaStyle"
             android:text="{quiz.risposte[2]}"
+            android:textAllCaps="false"
             tools:text='Risposta 3' />
 
         <Button
             android:id="@+id/risposta4"
             style="@style/rispostaStyle"
             android:text="{quiz.risposte[3]}"
+            android:textAllCaps="false"
             tools:text='Risposta 4' />
 
         <Button
@@ -84,6 +88,14 @@
             android:layout_marginTop="10dp"
             android:text="Avanti" />
     </LinearLayout>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gif"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/bubble"
+        android:visibility="gone" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 
