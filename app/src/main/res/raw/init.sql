@@ -7,7 +7,7 @@ INSERT INTO category values(3, "Musica");
 INSERT INTO category values(4, "Programmazione");
 INSERT INTO category values(5, "Algoritmi");
 INSERT INTO question values(null, 4, 3, "Qual è il concetto, in programmazione OOP, che permette di comporre le classi in una gerarchia?", "Polimorfismo", "Type-Inference", "Ereditarietà", "Covarianza", null, 10);
-INSERT INTO question values(null, 4, 3, "Quale funzione, in kotlin, ti permette di creare una mappa mutabile con oggetti stringa?", "mapOf<String>()", "mutableMapOf<String>()", "Map.of<String>()", "CollectionUtils.mapOf<String>()", null, 30);
+INSERT INTO question values(null, 4, 3, "Quale funzione, in Kotlin, ti permette di creare una mappa mutabile con oggetti di tipo T?", "mapOf<T>()", "mutableMapOf<T>()", "Map.of<T>()", "Collections.mapOf<T>()", null, 30);
 INSERT INTO question values(null, 4, 4, "Qual è il framework di Android che permette il supporto delle sue librerie legacy?", "Spring", "Android Studio", "androidx", "Android Jetpack", null, 40);
 INSERT INTO question values(null, 4, 1, "Senza di cosa è impossibile creare un'app android (che non sia un widget)?", "Activity", "Fragment", "Navigator", "Kotlin", null, 20);
 INSERT INTO question values(null, 4, 2, "Qual è il l'RDBMS standard usato per gestire la persistenza in android?", "MySQLite", "SQLite", "LiteMySQL", "MongoLiteDb", null, 10);
@@ -17,3 +17,9 @@ INSERT INTO question values(null, 4, 2, "Che cosa, nella programmazione, è cons
 INSERT INTO question values(null, 5, 1, "Quale di questi algoritmi è spiegato nel video?", "Insertion sort", "Merge sort", "Selection sort", "Switch sort", "https://www.codesdope.com/staticroot/images/algorithm/sorting3.gif", 30);
 INSERT INTO question values(null, 5, 2, "Quale di questi algoritmi è spiegato nel video?", "Apple sort", "Min sort", "Bubble sort", "Hexagon sort", "https://upload.wikimedia.org/wikipedia/commons/2/2a/Bubble_sort_with_flag.gif", 30);
 INSERT INTO question values(null, 5, 2, "Quale di questi algoritmi è spiegato nel video?", "Merge sort", "Linear search", "Key sort", "Binary search", "https://lh3.googleusercontent.com/proxy/n4lEdHRjV2nNJhosOvFEr17C-fre78sIqu7Byzb8wRBdI5SYcS55ADcntHNk6jVOWzmRasz1FSa0kzT4XZp6sQcaYYT4EuMCp6cXPFeRzks", 30);
+INSERT INTO question values(null, 3, 2, "Quale musicista ha composto 'La Valchiria'", "Wolfgang Amadeus Mozart", "Richard Wagner", "Robert C. Martin", "Ludwig van Beethoven", null, 30);
+INSERT INTO question values(null, 3, 4, "Come si intitola l'opera di Chopin famosissima nel film 'Il Pianista'?", "Nocturne Op. 9, No. 1", "Swan Lake", "Für Elise", "Nocturne in C# minor", null, 30);
+INSERT INTO question values(null, 1, 2, "Come s'intitola il film di Woody Allen dove il protagonista s'identifica con qualunque persona con cui interagisce?", "Crimini e Misfatti", "Zelig", "Match Point", "Arancia meccanica", null, 30);
+INSERT INTO question values(null, 1, 3, "Qual è il nome della serie TV più famosa sulle distopie digitali?", "Z Nation", "The Barrier", "Black Mirror", "Scary Movie", null, 30);
+INSERT INTO question values(null, 2, 4, "Qual è circa il tempo che la luce ci mette a percorrere dal Sole alla Terra?", "Circa 0 secondi", "1 minuto", "10 ore", "8 minuti", null, 30);
+INSERT INTO question values(null, 2, 3, "Chi, pur avendo una sola voce, si trasforma in quadrupede, bipede e tripede?", "Il verme del Nicaragua", "La sfinge", "L'uomo", "Il serpente a sonagli", null, 30);
