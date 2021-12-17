@@ -9,16 +9,31 @@
     android:orientation="vertical"
     tools:context=".fragment.ScoreboardFragment">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/quiz_image" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/FirstChoiceTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/quiz_frame_title"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="174dp" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TableLayout
-            android:layout_width="match_parent"
             android:id="@+id/scoreboard_table"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
 
@@ -26,7 +41,7 @@
                 android:id="@+id/txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ICC Ranking of Players:"
+                android:text="Punteggi"
                 android:textSize="20dp"
                 android:textStyle="bold">
 
