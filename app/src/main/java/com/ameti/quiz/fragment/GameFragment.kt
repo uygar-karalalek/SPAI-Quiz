@@ -15,35 +15,16 @@ import com.ameti.quiz.R
 import com.ameti.quiz.db.QuizDatabaseManager
 
 class GameFragment : Fragment() {
-    data class Domanda(
-        val domanda: String,
-        val risposte: List<String>,
-        val rispostaGiusta: String,
-        val punti: Int
-    )
-
-    private val domande: MutableList<Domanda> = mutableListOf(
-        Domanda(domanda = "Quale cantante canta la canzone \"Roar\"?",
-                risposte = listOf("Katy Perry", "Miley Cyrus", "Rita Ora", "Adele"),
-                rispostaGiusta = "Katy Perry",
-                punti = 10
-
-        ),
-        Domanda(domanda = "Quale cantante canta la canzone \"Snowman\"?",
-            risposte = listOf("Dua Lipa", "Pink", "Sia", "Beyonce"),
-            rispostaGiusta = "Sia",
-            punti = 20
-        )
-    )
     var questions = mutableListOf<QuizDatabaseManager.Question>()
 
     lateinit var dbManager: QuizDatabaseManager
     lateinit var sharedPreferences: SharedPreferences
     lateinit var rootView: View
-    lateinit var risposta1: Button
-    lateinit var risposta2: Button
-    lateinit var risposta3: Button
-    lateinit var risposta4: Button
+    lateinit var answer1: Button
+    lateinit var answer2: Button
+    lateinit var answer3: Button
+    lateinit var answer4: Button
+    lateinit var answers: MutableList<Button>
     var count = 0
     var score = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,21 +44,19 @@ class GameFragment : Fragment() {
 
         if(arguments != null) {
             if(requireArguments().get("categoryId") != null) {
-                val categoryId = requireArguments().get("puntiFatti")
-                questions = dbManager.getQuestions("4")
+                val categoryId = requireArguments().get("categoryId").toString()
+                questions = dbManager.getQuestions(categoryId)
             }
         }
-        risposta1 = rootView.findViewById(R.id.risposta1)
-        risposta1.setOnClickListener { controllaRisposta(risposta1) }
+        answer1 = rootView.findViewById(R.id.risposta1)
+        answer2 = rootView.findViewById(R.id.risposta2)
+        answer3 = rootView.findViewById(R.id.risposta3)
+        answer4 = rootView.findViewById(R.id.risposta4)
 
-        risposta2 = rootView.findViewById(R.id.risposta2)
-        risposta2.setOnClickListener { controllaRisposta(risposta2) }
-
-        risposta3 = rootView.findViewById(R.id.risposta3)
-        risposta3.setOnClickListener { controllaRisposta(risposta3) }
-
-        risposta4 = rootView.findViewById(R.id.risposta4)
-        risposta4.setOnClickListener { controllaRisposta(risposta4) }
+        answers = mutableListOf(answer1, answer2, answer3, answer4)
+        answers.forEach {
+            it.setOnClickListener { buttonClickHandler(it as Button) }
+        }
 
         setData();
 
@@ -85,7 +64,7 @@ class GameFragment : Fragment() {
         { view: View ->
             count++;
             if(count >= (questions.size)) {
-                val bundle: Bundle = Bundle();
+                val bundle = Bundle();
                 bundle.putString("puntiFatti", score.toString());
                 dbManager.updatePoints(user.toString(), score)
                 view.findNavController().navigate(R.id.action_gameFragment_to_gameFinishFragment, bundle)
@@ -102,26 +81,23 @@ class GameFragment : Fragment() {
     private fun setData() {
         rootView.findViewById<TextView>(R.id.id_domanda).text = "Domanda " + (count + 1).toString()
         rootView.findViewById<TextView>(R.id.domanda).text = questions.get(count).value;
-        risposta1.text = questions.get(count).answers[0]
-        risposta2.text = questions.get(count).answers[1]
-        risposta3.text = questions.get(count).answers[2]
-        risposta4.text = questions.get(count).answers[3]
-    }
-
-    private fun controllaRisposta(risposta: Button) {
-        val rispostaId = risposta.id;
-        disableAllButtons();
-        when(rispostaId) {
-            R.id.risposta1 -> {
-                colorBottone(risposta1)
-            }
-            R.id.risposta2 -> colorBottone(risposta2)
-            R.id.risposta3 -> colorBottone(risposta3)
-            R.id.risposta4 -> colorBottone(risposta4)
+        answers.forEachIndexed { id, risposta ->
+            risposta.text = questions.get(count).answers[id]
         }
     }
 
-    private fun colorBottone(risposta: Button) {
+    private fun buttonClickHandler(risposta: Button) {
+        val rispostaId = risposta.id;
+        disableAllButtons();
+        when(rispostaId) {
+            R.id.risposta1 -> { checkAnswer(answer1) }
+            R.id.risposta2 -> checkAnswer(answer2)
+            R.id.risposta3 -> checkAnswer(answer3)
+            R.id.risposta4 -> checkAnswer(answer4)
+        }
+    }
+
+    private fun checkAnswer(risposta: Button) {
         var rightAnswer = questions.get(count).answers.get(questions.get(count).wright - 1);
         if(risposta.text.equals(rightAnswer)) {
             risposta.setBackgroundColor(Color.GREEN)
@@ -129,30 +105,19 @@ class GameFragment : Fragment() {
         }
         else {
             risposta.setBackgroundColor(Color.RED)
-            var risposte: MutableList<Button> = mutableListOf()
-            risposte.add(risposta1)
-            risposte.add(risposta2)
-            risposte.add(risposta3)
-            risposte.add(risposta4)
-            val rispostaGiustaButton: Button = risposte.filter { it.text == rightAnswer }.get(0)
+            val rispostaGiustaButton: Button = answers.filter { it.text == rightAnswer }.get(0)
             rispostaGiustaButton.setBackgroundColor(Color.GREEN)
         }
     }
 
     private fun disableAllButtons() {
-        risposta1.isEnabled = false;
-        risposta2.isEnabled = false;
-        risposta3.isEnabled = false;
-        risposta4.isEnabled = false;
+        answers.forEach {
+            it.isEnabled = false;
+        }
     }
 
     private fun initialiseAllButtons() {
-        var risposte: MutableList<Button> = mutableListOf()
-        risposte.add(risposta1)
-        risposte.add(risposta2)
-        risposte.add(risposta3)
-        risposte.add(risposta4)
-        risposte.forEach {
+        answers.forEach {
             it.isEnabled = true;
             it.setBackgroundColor(Color.parseColor("#FF9C27B0"))
         }

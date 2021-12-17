@@ -12,10 +12,6 @@ import com.ameti.quiz.R
 import com.ameti.quiz.db.QuizDatabaseManager
 
 class CategoriesFragment : Fragment() {
-    data class Category(
-        val id: Int,
-        val name: String
-    )
     lateinit var rootView: View
     lateinit var dbManager: QuizDatabaseManager
 
@@ -47,9 +43,6 @@ class CategoriesFragment : Fragment() {
             button.setOnClickListener {
                 it.findNavController().navigate(R.id.action_categoriesFragment_to_gameFragment, bundle)
             }
-        }
-        category1.setOnClickListener {
-            it.findNavController().navigate(R.id.action_categoriesFragment_to_gameFragment)
         }
 
         return inflate

@@ -115,7 +115,6 @@ class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 0) 
                 cursor.moveToNext();
             }
         }
-
         return idAndName
     }
 
