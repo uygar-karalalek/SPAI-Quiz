@@ -3,12 +3,22 @@ package com.ameti.quiz.db
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.ameti.quiz.R
+import com.ameti.quiz.fragment.GameFragment
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.lang.Exception
 
 class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 0) {
+
+    data class Question(
+        val category: Int,
+        val wright: Int,
+        val value: String,
+        val answers: MutableList<String>,
+        val additional_data: String?,
+        val win_points: Int
+    )
 
     override fun dbVersionChanged(
         sqliteDatabase: SQLiteDatabase?,
@@ -107,6 +117,41 @@ class QuizDatabaseManager(val context: Context) : DatabaseManager("quiz.db", 0) 
         }
 
         return idAndName
+    }
+
+    fun getQuestions(category: String): MutableList<Question> {
+        val cursor = sqliteDatabase.query(
+            "question",
+            arrayOf("category", "wright", "value", "response1", "response2", "response3", "response4", "additional_data", "win_points"),
+            "category=?",
+            arrayOf(category),
+            null,
+            null,
+            null
+        )
+
+        val questions: MutableList<Question> = mutableListOf()
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast) {
+                val question = Question(
+                    category = cursor.getInt(cursor.getColumnIndex("category")),
+                    wright = cursor.getInt(cursor.getColumnIndex("wright")),
+                    value = cursor.getString(cursor.getColumnIndex("value")),
+                    answers = mutableListOf(
+                        cursor.getString(cursor.getColumnIndex("response1")),
+                        cursor.getString(cursor.getColumnIndex("response2")),
+                        cursor.getString(cursor.getColumnIndex("response3")),
+                        cursor.getString(cursor.getColumnIndex("response4"))
+                    ),
+                    additional_data = cursor.getString(cursor.getColumnIndex("additional_data")),
+                    win_points = cursor.getInt(cursor.getColumnIndex("win_points"))
+                )
+                questions.add(question);
+                cursor.moveToNext();
+            }
+        }
+
+        return questions
     }
 
     fun getUserClassification(): ArrayList<Pair<String, Int>> {

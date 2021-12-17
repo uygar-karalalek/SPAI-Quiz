@@ -59,8 +59,14 @@ class GameFragment : Fragment() {
         rootView = inflate.rootView
 
         var user = sharedPreferences.getString("user", null)
+        var questions = mutableListOf<QuizDatabaseManager.Question>()
 
-
+        if(arguments != null) {
+            if(requireArguments().get("categoryId") != null) {
+                val categoryId = requireArguments().get("puntiFatti")
+                questions = dbManager.getQuestions("4")
+            }
+        }
         risposta1 = rootView.findViewById(R.id.risposta1)
         risposta1.setOnClickListener { controllaRisposta(risposta1) }
 
